@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayodhya | the timeless city</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <!-- Font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #faf7f2;
+      color: #2e2a28;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    .fade-in.show {
+      opacity: 1;
+    }
+
+    .scale-image {
+      transition: transform 1.2s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    .scale-image:hover {
+      transform: scale(1.02);
+    }
+
+    /* Hero Section - FIXED VIDEO */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    #hero-video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%;
+      background: rgba(20, 15, 10, 0.25);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 950px;
+      padding: 2rem;
+      animation: softAppear 2s ease forwards;
+    }
+
+    @keyframes softAppear {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      font-weight: 300;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255,215,170,0.3);
+    }
+
+    .hero-title {
+      font-size: clamp(3.5rem, 12vw, 6.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      margin-bottom: 1rem;
+    }
+
+    .hero-title span {
+      font-style: italic;
+      font-weight: 500;
+      color: #fbe9d2;
+    }
+
+    .hero-description {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 1.5rem auto 0;
+      font-weight: 300;
+      opacity: 0.9;
+    }
+
+    /* Navigation */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      background: rgba(250, 247, 242, 0.98);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      padding: 1rem 0;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #4f3b2c;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.8rem;
+      font-size: 0.95rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #3f3a35;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 0;
+      line-height: 1.2;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: #b58b6b;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-links a:hover {
+      color: #7a5a44;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-links a.active {
+      color: #b58b6b !important;
+      font-weight: 500;
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 0;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 600;
+      color: #2c241e;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: #c6a27a;
+      margin-top: 0.75rem;
+    }
+
+    .title-light {
+      font-weight: 300;
+      color: #6b5847;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Heritage Grid */
+    .heritage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    .heritage-grid.reverse {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .image-frame {
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.2);
+    }
+
+    .image-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .image-frame:hover img {
+      transform: scale(1.03);
+    }
+
+    .text-content p {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      color: #3e3732;
+    }
+
+    .text-content .dropcap::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      float: left;
+      line-height: 0.8;
+      padding-right: 0.5rem;
+      color: #876b52;
+      margin-top: -0.2em;
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .gallery-item {
+      border-radius: 2px;
+      overflow: hidden;
+      background: #e9e0d6;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+      transition: all 0.3s ease-in-out;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .gallery-item.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-caption {
+      padding: 1.2rem 1rem 1.5rem;
+      background: #fffcf8;
+      font-size: 0.95rem;
+      color: #3a322c;
+      border-top: 1px solid #eee5dc;
+    }
+
+    .gallery-caption strong {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #5b4433;
+    }
+
+    /* Quote Block */
+    .quote-block {
+      background: #f1ebe4;
+      padding: 4rem 3rem;
+      border-radius: 2px;
+      margin: 4rem 0;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      line-height: 1.4;
+      color: #413429;
+      text-align: center;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.8);
+    }
+
+    .quote-author {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 1.8rem;
+      color: #856e5a;
+    }
+
+    /* Footer */
+    footer {
+      background: #2b241f;
+      color: #ddcfc2;
+      padding: 3rem 0;
+      font-weight: 300;
+      text-align: center;
+    }
+
+    .footer-divider {
+      width: 60px;
+      height: 2px;
+      background: #6e5b4c;
+      margin: 1.5rem auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .heritage-grid, .heritage-grid.reverse {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 3.5rem;
+      }
+      .container {
+        padding: 0 1rem;
+      }
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 10000;
+      overflow-y: auto;
+      backdrop-filter: blur(8px);
+      display: none;
+    }
+    
+    .modal-content {
+      max-width: 95%;
+      max-height: 95vh;
+      margin: 2.5% auto;
+      background: #faf7f2;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    }
+    
+    .modal-close {
+      position: fixed;
+      top: 25px; right: 35px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+      z-index: 10001;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    
+    .modal-close:hover {
+      background: rgba(255,255,255,0.3);
+      transform: scale(1.1);
+    }
+    
+    #modal-loading {
+      padding: 4rem;
+      text-align: center;
+      color: #6b5847;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+    }
+    
+    #modal-frame {
+      width: 100%; 
+      height: 90vh; 
+      border: none; 
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      .modal-content { margin: 5% 2.5%; max-width: 95%; }
+      .modal-close { top: 15px; right: 15px; width: 45px; height: 45px; font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero -->
+  <section class="hero">
+    <!-- ✅ FIXED VIDEO - Now will autoplay everywhere -->
+    <video id="hero-video-bg" 
+           autoplay 
+           muted 
+           loop 
+           playsinline 
+           preload="auto"
+           poster="hero-fallback.jpg">
+      <source src="assets/ayodhya drone shot.mp4" type="video/mp4">
+      <!-- Fallback if video fails -->
+      <img src="hero-fallback.jpg" alt="Ayodhya Hero" style="width:100%;height:100%;object-fit:cover;">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-subtitle">saṃskṛti · dharma · itihāsa</div>
+      <h1 class="hero-title">Ayodhya<br><span>the timeless city</span></h1>
+      <p class="hero-description">Cradle of ancient glory, birthplace of Śrī Rāma, and an unbroken stream of civilisation that flows through the epochs.</p>
+      <p class="hero-description">-Design By PIYUSH GAIKWAD</p>
+    </div>
+  </section>
+
+  <!-- Navigation -->
+  <div class="sticky-nav">
+    <div class="container nav-container">
+      <div class="logo">अयोध्या</div>
+      <div class="nav-links">
+        <a href="#" onclick="openModal('pages/antiquity')" data-modal="pages/antiquity">antiquity</a>
+        <a href="#" onclick="openModal('pages/ramayana')" data-modal="pages/ramayana">ramayana</a>
+        <a href="#" onclick="openModal('pages/heritage')" data-modal="pages/heritage">heritage</a>
+        <a href="#" onclick="openModal('pages/sacred')" data-modal="pages/sacred">sacred</a>
+        <a href="#" onclick="openModal('pages/now')" data-modal="pages/now">now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Antiquity Section -->
+    <section id="antiquity" class="fade-up">
+      <div class="title-light">· purāṇic age ·</div>
+      <h2 class="section-title">City of immemorial antiquity</h2>
+      <div class="heritage-grid">
+        <div class="image-frame scale-image">
+          <img src="assets/ancient ghat.jpg" alt="Ancient ghats Ayodhya" loading="lazy">
+        </div>
+        <div class="text-content">
+          <p class="dropcap">Ayodhya, the capital of the ancient Kosala kingdom, finds mention in the Atharvaveda and is extolled as "built by gods and prosperous as paradise itself". For millennia, this city on the Sarayu river has been a beacon of dharma, culture, and spiritual seeking.</p>
+          <p>Ikshvaku dynasty kings ruled here in unbroken succession, and it was in Ayodhya that King Dasharatha nurtured his son Rāma, whose story became the Ramayana—the very soul of Indian ethos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ramayana Section -->
+    <section id="ramayana" class="fade-up">
+      <div class="title-light">· rāmāyaṇa ·</div>
+      <h2 class="section-title">The life of Śrī Rāma</h2>
+      <div class="heritage-grid">
+        <div class="image-frame scale-image">
+          <img src="assets/shree rama.jpg" alt="Temple art Rama" loading="lazy">
+        </div>
+        <div class="text-content">
+          <p>The Ramayana, composed by Maharishi Valmiki, immortalised Ayodhya as the backdrop of an epic journey of virtue, love, and duty. From the swayamvara to the exile, the city's very soil is steeped in the memories of Rāma, Sītā, Lakṣmaṇa, and Hanumān.</p>
+          <p>Historically, the city has been a symbol of righteousness, influencing art and literature across Asia, from Indonesia to Cambodia.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote -->
+    <div class="quote-block fade-in">
+      <i>"तदिदं मनुना पूर्वं धर्मसेतुं समाहितम् । अयोध्यायां निवसता सर्वलोकहिताय वै"</i>
+      <div class="quote-author">— Vālmīki Rāmāyaṇa</div>
+    </div>
+
+    <!-- Gallery -->
+    <section id="heritage">
+      <div class="title-light">· visual chronicle ·</div>
+      <h2 class="section-title">Echoes in stone & water</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item fade-up">
+          <img src="assets/sarayu river.avif" alt="Sarayu river" loading="lazy">
+          <div class="gallery-caption"><strong>Sarayu snan</strong> — sacred twilight ghats</div>
+        </div>
+        <div class="gallery-item fade-up">
+          <img src="assets/janmabhoomi.jpg" alt="Ram Janmabhoomi" loading="lazy">
+          <div class="gallery-caption"><strong>Rāma Janmabhūmi</strong> — birthplace temple</div>
+        </div>
+        <div class="gallery-item fade-up">
+          <img src="assets/hanuman garhi.jpg" alt="Hanuman Garhi" loading="lazy">
+          <div class="gallery-caption"><strong>Hanumān Garhi</strong> — guarding the city</div>
+        </div>
+        <div class="gallery-item fade-up">
+          <img src="assets/kanak bhawan.jpg" alt="Kanak Bhawan" loading="lazy">
+          <div class="gallery-caption"><strong>Kanak Bhawan</strong> — golden abode</div>
+        </div>
+        <div class="gallery-item fade-up">
+          <img src="assets/evening aarti.jpeg" alt="Evening aarti" loading="lazy">
+          <div class="gallery-caption"><strong>Ganga aarti</strong> — Sarayu banks</div>
+        </div>
+        <div class="gallery-item fade-up">
+          <img src="assets/old city alley.jpg" alt="Old city alley" loading="lazy">
+          <div class="gallery-caption"><strong>Purāṇa gullī</strong> — timeless lanes</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modern Ayodhya -->
+    <section id="now" class="fade-up">
+      <div class="title-light">· ayodhya today ·</div>
+      <h2 class="section-title">Continuum of civilisation</h2>
+      <div class="heritage-grid">
+        <div class="image-frame scale-image">
+          <img src="assets/new shree rama temple.png" alt="New Ram temple" loading="lazy">
+        </div>
+        <div class="text-content">
+          <p>In the 21st century, Ayodhya is witnessing a profound renaissance. The majestic Rāma Mandir rises as a symbol of devotion and architectural splendour. Pilgrims walk its lanes as the city marries ancient wisdom with modernity.</p>
+          <p>Ayodhya is not just a place; it is a continuity, an idea of return to one's roots.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="fade-in">
+    <div class="container">
+      <div class="logo" style="color: #e7d7cb;">अयोध्या · सरयू तीर</div>
+      <div class="footer-divider"></div>
+      <p style="font-size: 1rem; letter-spacing: 1px;">City that time cannot forget</p>
+      <p style="margin-top: 1.5rem; opacity: 0.6; font-size: 0.85rem;">© Itihasa Samiti — crafted with reverence</p>
+    </div>
+  </footer>
+
+  <!-- Universal Modal -->
+  <div id="universal-modal" class="modal-overlay">
+    <div class="modal-content">
+      <iframe id="modal-frame" style="width: 100%; height: 90vh; border: none; display: none;"></iframe>
+      <div id="modal-loading">Loading content...</div>
+    </div>
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // ✅ VIDEO AUTOPLAY FIXED - Multiple fallback methods
+    const video = document.getElementById('hero-video-bg');
+    
+    // Method 1: Native attributes (autoplay muted loop playsinline)
+    video.play().catch(e => console.log('Autoplay blocked'));
+
+    // Method 2: Play on first interaction
+    ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
+      document.addEventListener(event, () => {
+        video.play().catch(e => {});
+      }, { once: true });
+    });
+
+    // Intersection Observer - play when in viewport
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          video.play().catch(e => {});
+        }
+      });
+    }, { threshold: 0.1 });
+    observer.observe(video);
+
+    // Animation observer
+    const animationObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up, .fade-in, .gallery-item').forEach(el => {
+      animationObserver.observe(el);
+    });
+
+    // Modal functions
+    let currentModalType = '';
+    function openModal(type) {
+      currentModalType = type;
+      const modal = document.getElementById('universal-modal');
+      const frame = document.getElementById('modal-frame');
+      const loading = document.getElementById('modal-loading');
+      
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      
+      frame.style.display = 'none';
+      loading.style.display = 'block';
+      
+      frame.src = `${type}.html`;
+      frame.style.display = 'block';
+      frame.onload = () => {
+        loading.style.display = 'none';
+      };
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('universal-modal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+      document.getElementById('modal-frame').src = '';
+    }
+
+    // Global event listeners
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    document.getElementById('universal-modal').addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal-overlay')) closeModal();
+    });
+
+    // Active nav highlighting
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', function() {
+        document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

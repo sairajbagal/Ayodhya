@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rāmāyaṇa · Ayodhya and the epic</title>
+  <!-- refined font palette -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <!-- Font Awesome for subtle icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ----- reset & base ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #faf7f2;  /* warm old paper */
+      color: #2e2a28;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ----- animations ----- */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in {
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+    .fade-in.show {
+      opacity: 1;
+    }
+    .scale-image {
+      transition: transform 1.2s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    .scale-image:hover {
+      transform: scale(1.02);
+    }
+
+    /* ----- hero specific (ramayana) ----- */
+    .hero-ramayana {
+      position: relative;
+      height: 80vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #f7efe4;
+      overflow: hidden;
+      background: #2f2a24;
+    }
+    .hero-ramayana picture,
+    .hero-ramayana img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.6;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(25, 15, 8, 0.3);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1000px;
+      padding: 2rem;
+      animation: softAppear 1.8s ease forwards;
+    }
+    @keyframes softAppear {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .hero-sub {
+      font-size: 1.2rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      font-weight: 300;
+      background: rgba(210, 180, 140, 0.2);
+      backdrop-filter: blur(4px);
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(220, 190, 150, 0.3);
+    }
+    .hero-title {
+      font-size: clamp(3.5rem, 12vw, 6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      margin-bottom: 1rem;
+    }
+    .hero-title span {
+      font-style: italic;
+      font-weight: 400;
+      color: #e8cfb5;
+    }
+    .hero-description {
+      font-size: 1.3rem;
+      max-width: 750px;
+      margin: 1.5rem auto 0;
+      font-weight: 300;
+    }
+
+    /* ----- section styling ----- */
+    section {
+      padding: 5rem 0;
+    }
+    .section-title {
+      font-size: 3rem;
+      font-weight: 600;
+      color: #2c241e;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: #c6a27a;
+      margin-top: 0.75rem;
+    }
+    .title-light {
+      font-weight: 300;
+      color: #6b5847;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ----- grids & cards (ramayana focus) ----- */
+    .heritage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4rem;
+      align-items: center;
+      margin: 3rem 0;
+    }
+    .image-frame {
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.2);
+    }
+    .image-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 1s ease;
+    }
+    .image-frame:hover img {
+      transform: scale(1.03);
+    }
+    .image-frame figcaption {
+      background: #fffcf8;
+      padding: 1rem 1.2rem;
+      font-size: 0.95rem;
+      color: #4f443b;
+      border-top: 1px solid #ede3d8;
+      font-style: italic;
+    }
+    .text-content p {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      color: #3e3732;
+    }
+    .dropcap::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      float: left;
+      line-height: 0.8;
+      padding-right: 0.5rem;
+      color: #876b52;
+    }
+
+    /* inscription / verse block */
+    .verse-block {
+      background: #eee7df;
+      padding: 2.5rem;
+      border-left: 5px solid #b58b6b;
+      font-style: italic;
+      font-size: 1.2rem;
+      margin: 3rem 0;
+      font-family: 'Playfair Display', serif;
+      color: #3b2f27;
+      text-align: center;
+    }
+
+    /* timeline cards (ramayana epochs) */
+    .timeline-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 4rem 0;
+    }
+    .card {
+      background: #fffcf8;
+      padding: 2rem 2rem 2.5rem 2rem;
+      flex: 1 1 220px;
+      border-radius: 2px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+      border: 1px solid #ede3d8;
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+    }
+    .card i {
+      font-size: 2.2rem;
+      color: #8f735b;
+      margin-bottom: 1.2rem;
+    }
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .card p {
+      font-size: 1rem;
+      color: #4f443b;
+    }
+
+    /* art / sculpture grid with proper image details */
+    .art-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    .art-item {
+      background: #fffcf8;
+      border: 1px solid #e3d8cd;
+      border-radius: 2px;
+      overflow: hidden;
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .art-item figure {
+      margin: 0;
+    }
+    .art-item img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+    .art-item figcaption {
+      padding: 1rem 1.2rem 1.5rem;
+      background: #fffcf8;
+      font-size: 0.95rem;
+      color: #3a322c;
+      border-top: 1px solid #eee5dc;
+    }
+    .art-item figcaption strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: #533f30;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .art-item figcaption span {
+      font-size: 0.9rem;
+      color: #6b5d51;
+      display: block;
+      margin-top: 0.3rem;
+      font-style: italic;
+    }
+
+    /* quote block */
+    .sanskrit-quote {
+      background: #e2d7cb;
+      padding: 4rem 3rem;
+      text-align: center;
+      font-size: 2rem;
+      font-family: 'Playfair Display', serif;
+      color: #2f261f;
+      border-radius: 1px;
+      margin: 4rem 0;
+    }
+    .sanskrit-quote i {
+      font-weight: 400;
+    }
+    .quote-ref {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 2rem;
+      color: #6b5d51;
+    }
+
+    /* footer */
+    footer {
+      background: #2b241f;
+      color: #ddcfc2;
+      padding: 3rem 0;
+      font-weight: 300;
+      text-align: center;
+    }
+    .footer-divider {
+      width: 60px;
+      height: 2px;
+      background: #6e5b4c;
+      margin: 1.5rem auto;
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .heritage-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .art-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .art-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 3.5rem;
+      }
+    }
+
+    /* inpage navigation */
+    .inpage-nav {
+      background: #f1ebe4;
+      border-bottom: 1px solid #d6ccbf;
+      padding: 0.8rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(241, 235, 228, 0.85);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #4a4038;
+      font-weight: 400;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      padding: 0.25rem 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #b58b6b;
+      color: #2b221c;
+    }
+    .nav-links a i {
+      margin-right: 6px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <!-- ramayana hero -->
+  <div class="hero-ramayana">
+    <picture>
+      <img src="../assets/ram sita.png" alt="Ancient temple bas-relief depicting Rama and Sita" loading="lazy">
+    </picture>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-sub"><i class="fas fa-feather" style="margin-right: 8px;"></i> vālmīki · रामायण</div>
+      <h1 class="hero-title">the story of <span>rāma</span></h1>
+      <p class="hero-description">Ayodhya’s soul-epic: exile, devotion, and the return of dharma.</p>
+    </div>
+  </div>
+
+  <!-- sticky inpage nav -->
+  <!-- sticky inpage nav - FIXED -->
+<div class="inpage-nav">
+  <div class="container nav-links">
+    <a href="#balakanda"><i class="fas fa-child"></i> bālakāṇḍa</a>
+    <a href="#ayodhyakanda"><i class="fas fa-city"></i> ayodhyākāṇḍa</a>
+    <a href="#aranyakanda"><i class="fas fa-tree"></i> araṇyakāṇḍa·kiṣkindhā</a>  <!-- FIXED -->
+    <a href="#sundara"><i class="fas fa-star"></i> sundara·yuddha</a>            <!-- FIXED -->
+    <a href="#uttarakanda"><i class="fas fa-crown"></i>uttarakāṇḍa</a>            <!-- FIXED -->
+  </div>
+</div>
+
+  <!-- main container -->
+  <main class="container">
+
+    <!-- 1. Bālakāṇḍa: childhood and ayodhya -->
+    <section id="balakanda" class="fade-up">
+      <div class="title-light"><i class="fas fa-feather-alt"></i> bālakāṇḍa</div>
+      <h2 class="section-title">the birth & youth</h2>
+      <div class="heritage-grid">
+        <div class="text-content">
+          <p class="dropcap">The Rāmāyaṇa opens in Ayodhya, the splendid capital of Kosala. King Daśaratha, blessed with four sons — Rāma, Bharata, Lakṣmaṇa, and Śatrughna — after performing the putreṣṭi yajña. The boys grow up in the royal palace, tutored by sages Vasiṣṭha and Viśvāmitra. Rāma’s first adventure takes him to Mithila, where he breaks the bow of Śiva and wins Sītā’s hand.</p>
+          <p>The city of Ayodhya is described in loving detail: streets perfumed with sandal, palaces studded with gems, and citizens devoted to dharma. This kāṇḍa establishes the divine lineage and the perfect world that will soon be disrupted.</p>
+        </div>
+        <figure class="image-frame scale-image">
+          <img src="../assets/lord shiva bow." alt="Miniature painting: Rama breaking the bow" loading="lazy">
+          <figcaption><i class="fas fa-paint-brush"></i> Mughal-era miniature (c. 1590) depicting Rāma stringing the bow of Śiva. (British Museum)</figcaption>
+        </figure>
+      </div>
+      <div class="verse-block fade-in">
+        <i class="fas fa-quote-left" style="opacity:0.4; margin-right: 8px;"></i> ततो यज्ञे समाप्ते तु ऋत्विग्भिरभिपूजितम् । ददौ पुत्रान् दशरथो राजा देवव्रतानिव ॥ <br>— वाल्मीकि रामायण (बालकाण्ड १८.५२)
+      </div>
+    </section>
+
+    <!-- 2. Ayodhyākāṇḍa: the exile -->
+    <section id="ayodhyakanda" class="fade-up">
+      <div class="title-light"><i class="fas fa-city"></i> ayodhyākāṇḍa</div>
+      <h2 class="section-title">the departure & the vow</h2>
+      <div class="heritage-grid reverse" style="direction: rtl;">
+        <div class="text-content" style="direction: ltr;">
+          <p>The coronation of Rāma is announced, and Ayodhya decks itself in celebration. But Queen Kaikeyī, manipulated by Mantharā, demands two boons from Daśaratha: her son Bharata should be crowned, and Rāma exiled for fourteen years. Rāma accepts without a flicker, Sītā and Lakṣmaṇa insist on accompanying him. The city falls into grief as the trio depart for the forest.</p>
+          <p>Daśaratha dies of a broken heart. Bharata, returning from his uncle’s kingdom, refuses the throne and places Rāma’s sandals on the throne as a symbol of his rule. He settles in Nandigrāma, awaiting Rāma’s return.</p>
+        </div>
+        <figure class="image-frame scale-image">
+          <img src="../assets/rama leaving ayodhya.png" alt="Modern painting of Rama's departure from Ayodhya" loading="lazy">
+          <figcaption><i class="fas fa-palette"></i> Pahari painting (c. 1780): Rāma, Sītā, and Lakṣmaṇa in ascetic garb leaving Ayodhya. (Chandigarh Museum)</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 3. Araṇyakāṇḍa & Kishkindhā in cards (condensed) -->
+    <section id="aranyakanda" class="fade-up">
+      <div class="title-light"><i class="fas fa-tree"></i> araṇyakāṇḍa · kiṣkindhā</div>
+      <h2 class="section-title">forest & alliance</h2>
+      <div class="timeline-cards">
+        <div class="card fade-up">
+          <i class="fas fa-dove"></i>
+          <h3>encounter with Vīradha</h3>
+          <p>In the Daṇḍaka forest, the trio meets sages and slays demons. The atmosphere is one of asceticism and vigilance.</p>
+        </div>
+        <div class="card fade-up">
+          <i class="fas fa-deer"></i>
+          <h3>the golden deer</h3>
+          <p>Mārīca, disguised as a golden deer, lures Rāma away. Rāvaṇa abducts Sītā after Jatāyu’s futile resistance.</p>
+        </div>
+        <div class="card fade-up">
+          <i class="fas fa-monkey"></i>
+          <h3>kishkindhā</h3>
+          <p>Rāma meets Hanumān and Sugrīva. He helps Sugrīva regain his kingdom, and in return Sugrīva sends monkeys to search for Sītā.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Sundara & Yuddha art grid -->
+    <section id="sundara" class="fade-up">
+      <div class="title-light"><i class="fas fa-star"></i> sundara · yuddha</div>
+      <h2 class="section-title">the leap & the war</h2>
+      <div class="art-grid">
+        <figure class="art-item fade-up">
+          <img src="../assets/hanuman leaps to lanka.jpg" alt="Hanuman flying over ocean" loading="lazy">
+          <figcaption>
+            <strong>Hanumān leaps to Laṅkā</strong>
+            In Sundara Kāṇḍa, Hanumān crosses the ocean, finds Sītā in Aśoka grove, and gives her Rāma’s ring.
+            <span>Kalamkari painting, Andhra Pradesh</span>
+          </figcaption>
+        </figure>
+        <figure class="art-item fade-up">
+          <img src="../assets/monkey builded the bridge.jpg" alt="Rama and Lakshmana fighting demons" loading="lazy">
+          <figcaption>
+            <strong>building the bridge</strong>
+            The monkey army builds a bridge (Rāma Setu) to Laṅkā. The war begins with epic duels.
+            <span>Raja Ravi Varma press, c.1900</span>
+          </figcaption>
+        </figure>
+        <figure class="art-item fade-up">
+          <img src="../assets/ram attacks ravana.webp" alt="Rama and Ravana in battle" loading="lazy">
+          <figcaption>
+            <strong>Rāvaṇa falls</strong>
+            After a fierce battle, Rāma slays Rāvaṇa with the Brahmāstra. Vibhīṣaṇa is crowned king.
+            <span>Mysore school, 19th century</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 5. The return to Ayodhya -->
+<!-- ✅ FIXED -->
+<section id="uttarakanda" class="fade-up">
+  <div class="title-light"><i class="fas fa-crown"></i> uttarakāṇḍa</div>
+
+      <h2 class="section-title">the coronation</h2>
+      <div class="heritage-grid">
+        <figure class="image-frame scale-image">
+          <img src="../assets/shree ram coronation.jpg" alt="Rama's coronation in Ayodhya" loading="lazy">
+          <figcaption><i class="fas fa-crown"></i> Rāma’s rājyābhiṣeka (coronation) in Ayodhya. The city illuminated with rows of lamps — the first Dīpāvalī. (Baroda Museum)</figcaption>
+        </figure>
+        <div class="text-content">
+          <p>Fourteen years of exile end. Rāma, Sītā, and Lakṣmaṇa return to Ayodhya. The city is decked with flowers, and Bharata places Rāma’s sandals at his feet. The coronation ushers in the Rāma Rājya — a reign of perfect justice, peace, and prosperity. Every year, Ayodhya celebrates this homecoming as Dīpāvalī, the festival of lights.</p>
+          <p>The Rāmāyaṇa closes with the establishment of the solar dynasty in glory, and the promise that as long as the mountains stand and rivers flow, the story of Rāma will be told.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- final verse -->
+    <div class="sanskrit-quote fade-in">
+      <i>“रामो विग्रहवान् धर्मः साधुः सत्यपराक्रमः । राजा सर्वस्य लोकस्य देवानामिव वासवः”</i>
+      <div class="quote-ref">— Vālmīki Rāmāyaṇa (Yuddhakāṇḍa)</div>
+    </div>
+
+  </main>
+
+  <!-- footer -->
+  <footer class="fade-in">
+    <div class="container">
+      <div style="font-family: 'Playfair Display', serif; font-size: 2rem; letter-spacing: 2px;">अयोध्या</div>
+      <div class="footer-divider"></div>
+      <p>the eternal city of rāma</p>
+      <p style="margin-top: 2rem; opacity: 0.6; font-size: 0.8rem;">© itihasa darśana · rāmāyaṇa across art and time</p>
+    </div>
+  </footer>
+
+  <!-- Intersection Observer for animations -->
+  <script>
+    (function() {
+      const animateElements = document.querySelectorAll('.fade-up, .fade-in, .card, .art-item, .verse-block, .sanskrit-quote');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+      animateElements.forEach(el => observer.observe(el));
+    })();
+  </script>
+  <style>
+    .hero-ramayana {
+      background: #332d26 url('https://images.unsplash.com/photo-1624898131815-855c7daccf3b?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+    }
+  </style>
+</body>
+</html>

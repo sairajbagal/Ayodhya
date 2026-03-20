@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayodhya Now · contemporary city</title>
+  <!-- refined font palette -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <!-- Font Awesome for subtle icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ----- reset & base (consistent with all tabs) ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #faf7f2;  /* warm old paper */
+      color: #2e2a28;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ----- animations (identical across tabs) ----- */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in {
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+    .fade-in.show {
+      opacity: 1;
+    }
+    .scale-image {
+      transition: transform 1.2s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    .scale-image:hover {
+      transform: scale(1.02);
+    }
+
+    /* ----- hero specific (now) - matching antiquity tone ----- */
+    .hero-now {
+      position: relative;
+      height: 80vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #f0e7dc;
+      overflow: hidden;
+      background: #2f2a24; /* deep brown fallback */
+    }
+    .hero-now picture,
+    .hero-now img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.65;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 10, 8, 0.35); /* same overlay */
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1000px;
+      padding: 2rem;
+      animation: softAppear 1.8s ease forwards;
+    }
+    @keyframes softAppear {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .hero-sub {
+      font-size: 1.2rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      font-weight: 300;
+      background: rgba(255, 235, 210, 0.15);
+      backdrop-filter: blur(4px);
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(230,200,160,0.2);
+      font-family: 'Inter', sans-serif;
+    }
+    .hero-title {
+      font-size: clamp(3.5rem, 12vw, 6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      margin-bottom: 1rem;
+    }
+    .hero-title span {
+      font-style: italic;
+      font-weight: 400;
+      color: #ebd5ba;
+    }
+    .hero-description {
+      font-size: 1.3rem;
+      max-width: 750px;
+      margin: 1.5rem auto 0;
+      font-weight: 300;
+      backdrop-filter: blur(2px);
+    }
+
+    /* ----- section styling (consistent) ----- */
+    section {
+      padding: 5rem 0;
+    }
+    .section-title {
+      font-size: 3rem;
+      font-weight: 600;
+      color: #2c241e;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: #c6a27a;
+      margin-top: 0.75rem;
+    }
+    .title-light {
+      font-weight: 300;
+      color: #6b5847;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ----- grids & cards (now focus) ----- */
+    .heritage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4rem;
+      align-items: center;
+      margin: 3rem 0;
+    }
+    .image-frame {
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.2);
+    }
+    .image-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 1s ease;
+    }
+    .image-frame:hover img {
+      transform: scale(1.03);
+    }
+    .image-frame figcaption {
+      background: #fffcf8;
+      padding: 1rem 1.2rem;
+      font-size: 0.95rem;
+      color: #4f443b;
+      border-top: 1px solid #ede3d8;
+      font-style: italic;
+    }
+    .text-content p {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      color: #3e3732;
+    }
+    .dropcap::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      float: left;
+      line-height: 0.8;
+      padding-right: 0.5rem;
+      color: #876b52;
+    }
+
+    /* development grid */
+    .development-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 4rem 0;
+    }
+    .dev-item {
+      background: #fffcf8;
+      border: 1px solid #e3d8cd;
+      border-radius: 2px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    .dev-item:hover {
+      transform: translateY(-6px);
+    }
+    .dev-item figure {
+      margin: 0;
+    }
+    .dev-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .dev-item figcaption {
+      padding: 1.2rem 1.2rem 1.5rem;
+      background: #fffcf8;
+    }
+    .dev-item figcaption strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: #533f30;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .dev-item figcaption span {
+      font-size: 0.9rem;
+      color: #6b5d51;
+      display: block;
+      margin-top: 0.3rem;
+    }
+
+    /* infrastructure cards */
+    .infra-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    .infra-card {
+      background: #fffcf8;
+      border: 1px solid #ede3d8;
+      padding: 2rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .infra-card i {
+      font-size: 2.5rem;
+      color: #8f735b;
+    }
+    .infra-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+    }
+
+    /* future vision cards */
+    .future-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    .future-item {
+      background: #fffcf8;
+      border: 1px solid #e3d8cd;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .future-item:hover {
+      transform: translateY(-5px);
+    }
+    .future-item i {
+      font-size: 2.5rem;
+      color: #8f735b;
+      margin-bottom: 1rem;
+    }
+    .future-item h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    /* stats banner */
+    .stats-banner {
+      background: #e2d7cb;
+      padding: 4rem 2rem;
+      margin: 4rem 0;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 2rem;
+      text-align: center;
+    }
+    .stat-item {
+      flex: 1 1 150px;
+    }
+    .stat-number {
+      font-size: 3rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      color: #4f3b2c;
+      line-height: 1.2;
+    }
+    .stat-label {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* quote block */
+    .now-quote {
+      background: #e2d7cb;
+      padding: 4rem 3rem;
+      text-align: center;
+      font-size: 1.9rem;
+      font-family: 'Playfair Display', serif;
+      color: #2f261f;
+      border-radius: 1px;
+      margin: 4rem 0;
+    }
+
+    /* footer */
+    footer {
+      background: #2b241f;
+      color: #ddcfc2;
+      padding: 3rem 0;
+      font-weight: 300;
+      text-align: center;
+    }
+    .footer-divider {
+      width: 60px;
+      height: 2px;
+      background: #6e5b4c;
+      margin: 1.5rem auto;
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .heritage-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .development-grid, .future-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .infra-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 600px) {
+      .development-grid, .future-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 3.5rem;
+      }
+    }
+
+    /* inpage navigation */
+    .inpage-nav {
+      background: #f1ebe4;
+      border-bottom: 1px solid #d6ccbf;
+      padding: 0.8rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(241, 235, 228, 0.85);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #4a4038;
+      font-weight: 400;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      padding: 0.25rem 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #b58b6b;
+      color: #2b221c;
+    }
+    .nav-links a i {
+      margin-right: 6px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <!-- now hero - matching visual tone -->
+  <div class="hero-now">
+    <picture>
+      <img src="assets/new shree rama temple.png" alt="New Ram temple with modern city skyline" loading="lazy">
+    </picture>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-sub"><i class="fas fa-city" style="margin-right: 8px;"></i> samprati · अधुना</div>
+      <h1 class="hero-title">ayodhya <span>now</span></h1>
+      <p class="hero-description">Ancient city meets the 21st century — transformation, development, and continuity.</p>
+    </div>
+  </div>
+
+  <!-- sticky inpage nav -->
+  <div class="inpage-nav">
+    <div class="container nav-links">
+      <a href="#transformation"><i class="fas fa-building"></i> transformation</a>
+      <a href="#infrastructure"><i class="fas fa-road"></i> infrastructure</a>
+      <a href="#culture"><i class="fas fa-landmark"></i> cultural revival</a>
+      <a href="#future"><i class="fas fa-rocket"></i> future vision</a>
+    </div>
+  </div>
+
+  <!-- main container -->
+  <main class="container">
+
+    <!-- 1. Transformation section -->
+    <section id="transformation" class="fade-up">
+      <div class="title-light"><i class="fas fa-sync-alt"></i> navanirmāṇa · नवनिर्माण</div>
+      <h2 class="section-title">a city reborn</h2>
+      <div class="heritage-grid">
+        <div class="text-content">
+          <p class="dropcap">The Ayodhya of today is undergoing the most profound transformation in its millennia-long history. With the construction of the magnificent Rāma Mandir and the redevelopment of the pilgrimage corridor, the city is being reshaped to accommodate millions of visitors while preserving its sacred character. Wide boulevards, modern amenities, and restored water bodies now complement the ancient temples.</p>
+          <p>The government's Ayodhya Development Plan envisions a world-class heritage city. Over ₹30,000 crore has been invested in infrastructure, including a new international airport, railway station, and riverfront promenade. Yet the planners have consciously retained the spiritual essence—the narrow lanes, the bustling bazaars, and the timeless rhythm of temple bells.</p>
+        </div>
+        <figure class="image-frame scale-image">
+          <img src="../assets/ram path.webp" alt="Redeveloped Ram path with pilgrims" loading="lazy">
+          <figcaption><i class="fas fa-hard-hat"></i> The newly widened Rāma Path leading to the temple, with traditional-style lamp posts and paved walkways. (Photograph: Ayodhya Development Authority, 2024)</figcaption>
+        </figure>
+      </div>
+
+      <!-- key development projects in grid -->
+      <div class="development-grid">
+        <figure class="dev-item fade-up">
+          <img src="../assets/ram mandir 3.avif" alt="Ram temple complex" loading="lazy">
+          <figcaption>
+            <strong>Rāma Janmabhūmi Mandir</strong>
+            The grand temple, completed in 2024, stands 161 feet tall with traditional Nāgara architecture. Built with pink sandstone from Rajasthan.
+            <span>Area: 2.7 acres · 3 floors</span>
+          </figcaption>
+        </figure>
+        <figure class="dev-item fade-up">
+          <img src="../assets/river front.jpg" alt="Sarayu riverfront" loading="lazy">
+          <figcaption>
+            <strong>Sarayu Riverfront</strong>
+            A 5-km long promenade with illuminated ghats, gardens, and a laser fountain. Modelled after Gujarat's Sabarmati riverfront.
+            <span>Phase 1 completed 2023</span>
+          </figcaption>
+        </figure>
+        <figure class="dev-item fade-up">
+          <img src="../assets/airport.jpg" alt="Ayodhya airport" loading="lazy">
+          <figcaption>
+            <strong>Maryada Purushottam Airport</strong>
+            International airport inaugurated in 2024, connecting Ayodhya to major Indian cities and soon to international destinations.
+            <span>Terminal capacity: 1,000 passengers/hour</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- stats banner -->
+    <div class="stats-banner fade-in">
+      <div class="stat-item">
+        <div class="stat-number">30M+</div>
+        <div class="stat-label">annual pilgrims (2024)</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">₹30k Cr</div>
+        <div class="stat-label">development investment</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100+</div>
+        <div class="stat-label">heritage sites restored</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">2.2M</div>
+        <div class="stat-label">diya record (Deepotsav)</div>
+      </div>
+    </div>
+
+    <!-- 2. Infrastructure -->
+    <section id="infrastructure" class="fade-up">
+      <div class="title-light"><i class="fas fa-road"></i> avasancāra · अवसंरचना</div>
+      <h2 class="section-title">building for tomorrow</h2>
+      <div class="infra-grid">
+        <div class="infra-card fade-up">
+          <i class="fas fa-train"></i>
+          <div>
+            <h3>Ayodhya Dham Junction</h3>
+            <p>Redeveloped railway station with world-class amenities, featuring facades inspired by temple architecture. 5 platforms, 24/7 operation.</p>
+          </div>
+        </div>
+        <div class="infra-card fade-up">
+          <i class="fas fa-bus"></i>
+          <div>
+            <h3>Multi-modal transport hub</h3>
+            <p>Integrated bus terminal with electric vehicle charging,预计 to handle 50,000 passengers daily.</p>
+          </div>
+        </div>
+        <div class="infra-card fade-up">
+          <i class="fas fa-hospital"></i>
+          <div>
+            <h3>Super-specialty hospital</h3>
+            <p>500-bed facility under construction, providing advanced healthcare for pilgrims and residents.</p>
+          </div>
+        </div>
+        <div class="infra-card fade-up">
+          <i class="fas fa-wifi"></i>
+          <div>
+            <h3>Smart city initiatives</h3>
+            <p>Free Wi-Fi zones, smart lighting, and integrated surveillance for enhanced safety.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Cultural revival -->
+    <section id="culture" class="fade-up">
+      <div class="title-light"><i class="fas fa-landmark"></i> punarujjīvana · पुनरुज्जीवन</div>
+      <h2 class="section-title">heritage & contemporary life</h2>
+      <div class="heritage-grid reverse" style="direction: rtl;">
+        <div class="text-content" style="direction: ltr;">
+          <p>Modern Ayodhya is not just about concrete and steel. There is a conscious effort to revive traditional arts, crafts, and performing traditions that had declined. The Ayodhya Cultural Centre now hosts regular Kathak performances, Ramlila festivals, and craft fairs. Local artisans are being trained in traditional stone carving, painting, and textile work to sustain livelihoods.</p>
+          <p>The Ram Katha Park hosts daily storytelling sessions, attracting scholars and tourists. Digital museums and interpretation centres have been set up to educate visitors about the city's layered history. The city is also becoming a hub for spiritual tourism, with yoga and meditation centres mushrooming along the river.</p>
+        </div>
+        <figure class="image-frame scale-image">
+          <img src="../assets/dance.webp" alt="Cultural performance in Ayodhya" loading="lazy">
+          <figcaption><i class="fas fa-music"></i> Ram Katha performance at the newly built Saryu Cultural Centre, blending traditional narration with modern stage design. (Photo: UP Culture Dept.)</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 4. Future vision -->
+    <section id="future" class="fade-up">
+      <div class="title-light"><i class="fas fa-rocket"></i> bhaviṣya · भविष्य</div>
+      <h2 class="section-title">the road ahead</h2>
+      <p style="font-size: 1.3rem; max-width: 900px; margin-bottom: 2rem;">Ayodhya's transformation is an ongoing journey. The coming years will see even more ambitious projects that aim to balance heritage with modernity.</p>
+      
+      <div class="future-grid">
+        <div class="future-item fade-up">
+          <i class="fas fa-tree"></i>
+          <h3>Vedic Eco Park</h3>
+          <p>A 100-acre forest park along the Sarayu, recreating the hermitage setting of ancient rishis. Planned for 2026.</p>
+        </div>
+        <div class="future-item fade-up">
+          <i class="fas fa-university"></i>
+          <h3>Ramayana Research Institute</h3>
+          <p>A world-class centre for Ramayana studies, with a manuscript library and digital archive.</p>
+        </div>
+        <div class="future-item fade-up">
+          <i class="fas fa-hotel"></i>
+          <h3>Heritage Hotels</h3>
+          <p>Restoration of old havelis into boutique hotels, offering authentic Ayodhya experiences.</p>
+        </div>
+        <div class="future-item fade-up">
+          <i class="fas fa-ship"></i>
+          <h3>Sarayu Cruise Tourism</h3>
+          <p>Electric boats for river cruises connecting major ghats, with onboard cultural performances.</p>
+        </div>
+        <div class="future-item fade-up">
+          <i class="fas fa-robot"></i>
+          <h3>Virtual Heritage Centre</h3>
+          <p>AR/VR experiences recreating ancient Ayodhya, allowing visitors to 'walk' through Valmiki's city.</p>
+        </div>
+        <div class="future-item fade-up">
+          <i class="fas fa-leaf"></i>
+          <h3>Green Corridor</h3>
+          <p>Pedestrian-only zones with electric buggies, reducing pollution in the core heritage area.</p>
+        </div>
+      </div>
+
+      <!-- final image: night view of new Ayodhya -->
+      <figure class="image-frame scale-image" style="margin-top: 3rem;">
+        <img src="../assets/deepotsav 1.jpg" alt="Illuminated Ayodhya at night" loading="lazy">
+        <figcaption><i class="fas fa-star"></i> Ayodhya by night: the illuminated temple spires and riverfront create a magical atmosphere, attracting visitors from around the world. (Photograph: Ayodhya Nagar Nigam, 2024)</figcaption>
+      </figure>
+    </section>
+
+    <!-- closing quote -->
+    <div class="now-quote fade-in">
+      <i>“पुरातनं न त्यजामः नवीनं आदद्महे”</i>
+      <div class="quote-ref" style="margin-top: 1.5rem;">— we do not abandon the ancient, we embrace the new</div>
+    </div>
+
+  </main>
+
+  <!-- footer -->
+  <footer class="fade-in">
+    <div class="container">
+      <div style="font-family: 'Playfair Display', serif; font-size: 2rem; letter-spacing: 2px;">अयोध्या</div>
+      <div class="footer-divider"></div>
+      <p>now — the eternal city in a new age</p>
+      <p style="margin-top: 2rem; opacity: 0.6; font-size: 0.8rem;">© itihasa darśana · documenting the transformation</p>
+    </div>
+  </footer>
+
+  <!-- Intersection Observer for animations -->
+  <script>
+    (function() {
+      const animateElements = document.querySelectorAll('.fade-up, .fade-in, .dev-item, .infra-card, .future-item, .stats-banner');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+      animateElements.forEach(el => observer.observe(el));
+    })();
+  </script>
+  <style>
+    /* ensure hero background fallback */
+    .hero-now {
+      background: #2f2a24 url('https://images.unsplash.com/photo-1667712406483-b7239ae1565b?q=80&w=1974&auto=format&fit=crop') center/cover no-repeat;
+    }
+  </style>
+</body>
+</html>

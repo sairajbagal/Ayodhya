@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heritage of Ayodhya · living legacy</title>
+  <!-- refined font palette -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <!-- Font Awesome for subtle icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ----- reset & base (identical to antiquity/ramayana) ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #faf7f2;  /* warm old paper */
+      color: #2e2a28;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ----- animations (consistent across all tabs) ----- */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in {
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+    .fade-in.show {
+      opacity: 1;
+    }
+    .scale-image {
+      transition: transform 1.2s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    .scale-image:hover {
+      transform: scale(1.02);
+    }
+
+    /* ----- hero specific (heritage) - matching antiquity tone ----- */
+    .hero-heritage {
+      position: relative;
+      height: 80vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #f0e7dc;
+      overflow: hidden;
+      background: #2f2a24; /* deep brown fallback */
+    }
+    .hero-heritage picture,
+    .hero-heritage img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.65;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 10, 8, 0.35); /* same overlay */
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1000px;
+      padding: 2rem;
+      animation: softAppear 1.8s ease forwards;
+    }
+    @keyframes softAppear {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .hero-sub {
+      font-size: 1.2rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      font-weight: 300;
+      background: rgba(255, 235, 210, 0.15);
+      backdrop-filter: blur(4px);
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(230,200,160,0.2);
+      font-family: 'Inter', sans-serif;
+    }
+    .hero-title {
+      font-size: clamp(3.5rem, 12vw, 6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      margin-bottom: 1rem;
+    }
+    .hero-title span {
+      font-style: italic;
+      font-weight: 400;
+      color: #ebd5ba;
+    }
+    .hero-description {
+      font-size: 1.3rem;
+      max-width: 750px;
+      margin: 1.5rem auto 0;
+      font-weight: 300;
+      backdrop-filter: blur(2px);
+    }
+
+    /* ----- section styling (consistent) ----- */
+    section {
+      padding: 5rem 0;
+    }
+    .section-title {
+      font-size: 3rem;
+      font-weight: 600;
+      color: #2c241e;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: #c6a27a;
+      margin-top: 0.75rem;
+    }
+    .title-light {
+      font-weight: 300;
+      color: #6b5847;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ----- grids & cards (heritage focus) ----- */
+    .heritage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4rem;
+      align-items: center;
+      margin: 3rem 0;
+    }
+    .image-frame {
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.2);
+    }
+    .image-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 1s ease;
+    }
+    .image-frame:hover img {
+      transform: scale(1.03);
+    }
+    .image-frame figcaption {
+      background: #fffcf8;
+      padding: 1rem 1.2rem;
+      font-size: 0.95rem;
+      color: #4f443b;
+      border-top: 1px solid #ede3d8;
+      font-style: italic;
+    }
+    .text-content p {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      color: #3e3732;
+    }
+    .dropcap::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      float: left;
+      line-height: 0.8;
+      padding-right: 0.5rem;
+      color: #876b52;
+    }
+
+    /* heritage specific: monument cards */
+    .monument-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 4rem 0;
+    }
+    .monument-item {
+      background: #fffcf8;
+      border: 1px solid #e3d8cd;
+      border-radius: 2px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .monument-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 30px -8px rgba(0,0,0,0.15);
+    }
+    .monument-item figure {
+      margin: 0;
+    }
+    .monument-item img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+    .monument-item figcaption {
+      padding: 1.2rem 1.2rem 1.8rem;
+      background: #fffcf8;
+    }
+    .monument-item figcaption strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: #533f30;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .monument-item figcaption span {
+      font-size: 0.95rem;
+      color: #6b5d51;
+      display: block;
+      margin-top: 0.3rem;
+      font-style: italic;
+    }
+
+    /* cultural heritage cards (arts, music, crafts) */
+    .culture-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    .culture-item {
+      background: #fffcf8;
+      border: 1px solid #ede3d8;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .culture-item:hover {
+      transform: translateY(-5px);
+    }
+    .culture-item i {
+      font-size: 3rem;
+      color: #8f735b;
+      margin-bottom: 1.2rem;
+    }
+    .culture-item h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .culture-item p {
+      font-size: 0.95rem;
+      color: #4f443b;
+    }
+
+    /* quote block (same style) */
+    .heritage-quote {
+      background: #e2d7cb;
+      padding: 4rem 3rem;
+      text-align: center;
+      font-size: 1.9rem;
+      font-family: 'Playfair Display', serif;
+      color: #2f261f;
+      border-radius: 1px;
+      margin: 4rem 0;
+    }
+    .heritage-quote i {
+      font-weight: 400;
+    }
+    .quote-ref {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 2rem;
+      color: #6b5d51;
+    }
+
+    /* footer (identical) */
+    footer {
+      background: #2b241f;
+      color: #ddcfc2;
+      padding: 3rem 0;
+      font-weight: 300;
+      text-align: center;
+    }
+    .footer-divider {
+      width: 60px;
+      height: 2px;
+      background: #6e5b4c;
+      margin: 1.5rem auto;
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .heritage-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .monument-grid, .culture-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .monument-grid, .culture-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 3.5rem;
+      }
+    }
+
+    /* inpage navigation (consistent) */
+    .inpage-nav {
+      background: #f1ebe4;
+      border-bottom: 1px solid #d6ccbf;
+      padding: 0.8rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(241, 235, 228, 0.85);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #4a4038;
+      font-weight: 400;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      padding: 0.25rem 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #b58b6b;
+      color: #2b221c;
+    }
+    .nav-links a i {
+      margin-right: 6px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <!-- heritage hero - matching visual tone -->
+  <div class="hero-heritage">
+    <picture>
+      <img src="../assets/sarayu river.avif" alt="Sarayu river ghat at dusk with temple spires" loading="lazy">
+    </picture>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-sub"><i class="fas fa-archway" style="margin-right: 8px;"></i> dharohara · वास्तु</div>
+      <h1 class="hero-title">heritage of <span>ayodhya</span></h1>
+      <p class="hero-description">Sacred ghats, living temples, and the unbroken artistic legacy.</p>
+    </div>
+  </div>
+
+  <!-- sticky inpage nav -->
+  <div class="inpage-nav">
+    <div class="container nav-links">
+      <a href="#ghats"><i class="fas fa-water"></i> sacred ghats</a>
+      <a href="#temples"><i class="fas fa-temple"></i> temples</a>
+      <a href="#arts"><i class="fas fa-palette"></i> arts & crafts</a>
+      <a href="#festivals"><i class="fas fa-fire"></i> festivals</a>
+    </div>
+  </div>
+
+  <!-- main container -->
+  <main class="container">
+
+    <!-- 1. Sacred Ghats: introduction with image -->
+    <section id="ghats" class="fade-up">
+      <div class="title-light"><i class="fas fa-water"></i> tīrtha · घाट</div>
+      <h2 class="section-title">where the sarayu meets eternity</h2>
+      <div class="heritage-grid">
+        <div class="text-content">
+          <p class="dropcap">The ghats of Ayodhya lining the river Sarayu are among the most sacred in India. For millennia, pilgrims have descended these stone steps to bathe in the purifying waters, especially during solar eclipses and kartika purnima. Each ghat has its own legend — from Guptar Ghat, where Rama is said to have taken his divine departure, to Lakshmana Ghat, associated with Rama’s devoted brother.</p>
+          <p>The daily aarti at dusk, with lamps floating on the river, creates an atmosphere of timeless devotion. The ghats are not just ritual spaces; they are living museums of architecture, with small shrines, inscriptions, and chhatris (memorial pavilions) dotting the banks.</p>
+        </div>
+        <figure class="image-frame scale-image">
+          <img src="../assets/aarti.png" alt="Evening aarti at Sarayu ghat" loading="lazy">
+          <figcaption><i class="fas fa-fire"></i> Evening aarti at Ram ki Paidi. Hundreds of diyas float on the Sarayu as priests chant Vedic hymns. (Photograph: Uttar Pradesh Tourism)</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- key ghats in monument grid -->
+    <section class="fade-up">
+      <div class="title-light"><i class="fas fa-map-pin"></i> prominent ghats</div>
+      <div class="monument-grid">
+        <figure class="monument-item fade-up">
+          <img src="../assets/guptar ghat.png" alt="Guptar Ghat" loading="lazy">
+          <figcaption>
+            <strong>Guptar Ghat</strong>
+            Believed to be where Rama entered the waters to return to his eternal form. Marks his 'gupta' (secret) departure.
+            <span>18th century pavilions · ASI protected</span>
+          </figcaption>
+        </figure>
+        <figure class="monument-item fade-up">
+          <img src="../assets/lakshamana ghat.png" alt="Lakshmana Ghat" loading="lazy">
+          <figcaption>
+            <strong>Lakshmana Ghat</strong>
+            Named after Rama's brother. Features a cluster of small shrines and a continuous flow of pilgrims throughout the year.
+            <span>Sacred to Vaishnavas</span>
+          </figcaption>
+        </figure>
+        <figure class="monument-item fade-up">
+          <img src="../assets/ram ki paidi.avif" alt="Ram ki Paidi" loading="lazy">
+          <figcaption>
+            <strong>Ram ki Paidi</strong>
+            The most famous ghat complex, rebuilt in the 19th century. Hosts the spectacular Deepotsav festival with millions of lamps.
+            <span>Over 100 steps · renovated 2020</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 2. Temples: architectural heritage -->
+    <section id="temples" class="fade-up">
+      <div class="title-light"><i class="fas fa-temple"></i> mandira · मंदिर</div>
+      <h2 class="section-title">abodes of the divine</h2>
+      <div class="heritage-grid reverse" style="direction: rtl;">
+        <div class="text-content" style="direction: ltr;">
+          <p>Ayodhya's temple architecture spans centuries, from Gupta-era foundations to the soaring new Rāma Mandir. The city is dotted with shrines dedicated to Rama, Sita, Lakshmana, Hanuman, and Shiva. Kanak Bhawan, gifted by Vamdevi, is famed for its exquisite idols of Rama and Sita adorned with gold. Hanuman Garhi, a fortress-like temple, guards the city's entrance.</p>
+          <p>The newly constructed Rāma Janmabhoomi Mandir, built of pink sandstone and marble, follows traditional Nāgara architecture. Its intricate carvings depict scenes from the Rāmāyaṇa, continuing the legacy of Indian temple craftsmanship.</p>
+        </div>
+        <figure class="image-frame scale-image">
+          <img src="../assets/new mandir.png" alt="New Ram temple under construction and completed" loading="lazy">
+          <figcaption><i class="fas fa-hammer"></i> The new Rāma Mandir (completed 2024) — a revival of ancient temple architecture. (Photo: Shri Ram Janmabhoomi Teerth Kshetra)</figcaption>
+        </figure>
+      </div>
+
+      <!-- additional temples in grid -->
+      <div class="monument-grid" style="margin-top: 3rem;">
+        <figure class="monument-item fade-up">
+          <img src="../assets/kanak bhawan.jpg" alt="Kanak Bhawan" loading="lazy">
+          <figcaption>
+            <strong>Kanak Bhawan</strong>
+            Gifted by Kaikeyi to Sita, later renovated by Vamdevi. The gold-plated idols are a major draw.
+            <span>16th century · renovated 1891</span>
+          </figcaption>
+        </figure>
+        <figure class="monument-item fade-up">
+          <img src="../assets/hanuman garhi.jpg" alt="Hanuman Garhi" loading="lazy">
+          <figcaption>
+            <strong>Hanuman Garhi</strong>
+            A 10th-century fort-temple with 76 steps. It is believed Hanuman guards Ayodhya from this spot.
+            <span>Reconstructed 18th century</span>
+          </figcaption>
+        </figure>
+        <figure class="monument-item fade-up">
+          <img src="../assets/nageshwar temple.jpg" alt="Nageshwarnath Temple" loading="lazy">
+          <figcaption>
+            <strong>Nageshwarnath Temple</strong>
+            Legend says Kush, Rama's son, built this Shiva temple. It remained a key pilgrimage site even during Mughal era.
+            <span>Annual Maha Shivaratri fair</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 3. Arts & Crafts: living heritage -->
+    <section id="arts" class="fade-up">
+      <div class="title-light"><i class="fas fa-palette"></i> kalā · शिल्प</div>
+      <h2 class="section-title">artistic traditions</h2>
+      <div class="culture-grid">
+        <div class="culture-item fade-up">
+          <i class="fas fa-paint-brush"></i>
+          <h3>Ayodhya painting</h3>
+          <p>A distinct school of miniature painting that flourished in the 17th–18th centuries, blending Mughal finesse with local Bhakti themes. Scenes from Rāmāyaṇa were a favourite subject.</p>
+        </div>
+        <div class="culture-item fade-up">
+          <i class="fas fa-mask"></i>
+          <h3>Ramlila tradition</h3>
+          <p>The dramatic re-enactment of Rāma's life, performed annually across north India, has its spiritual home in Ayodhya. Elaborate masks and costumes are crafted by local artisans.</p>
+        </div>
+        <div class="culture-item fade-up">
+          <i class="fas fa-gem"></i>
+          <h3>stone carving</h3>
+          <p>Ayodhya's sculptors have carved temple walls for centuries. The new Rāma Mandir alone employed over a thousand stone artisans from Rajasthan and Karnataka.</p>
+        </div>
+      </div>
+      <!-- detailed art image with caption -->
+      <figure class="image-frame scale-image" style="margin-top: 2rem;">
+        <img src="../assets/carving.png" alt="Detail of stone carving from Ayodhya" loading="lazy">
+        <figcaption><i class="fas fa-sculpture"></i> Sandstone carving from the new Rāma Mandir depicting the coronation scene. The craft tradition continues uninterrupted. (Photo: CBRI, 2023)</figcaption>
+      </figure>
+    </section>
+
+    <!-- 4. Festivals: living culture -->
+    <section id="festivals" class="fade-up">
+      <div class="title-light"><i class="fas fa-fire"></i> utsava · पर्व</div>
+      <h2 class="section-title">celebrations of faith</h2>
+      <div class="heritage-grid">
+        <figure class="image-frame scale-image">
+          <img src="../assets/deepotsav.jpg" alt="Deepotsav in Ayodhya" loading="lazy">
+          <figcaption><i class="fas fa-lightbulb"></i> Deepotsav 2023: over 22 lakh lamps illuminated the Sarayu ghats, setting a world record. The festival celebrates Rama's return to Ayodhya.</figcaption>
+        </figure>
+        <div class="text-content">
+          <p>Heritage is not just stone—it is lived experience. Ayodhya's festivals are spectacular expressions of its cultural soul. Deepotsav (Diwali) transforms the city into a sea of light, with millions of earthen lamps. Ram Navami, the birth of Rāma, draws millions of pilgrims for processions and chariot festivals.</p>
+          <p>Shravan Jhoola and Kartik Purnima see the ghats crowded with devotees. Folk songs, temple music, and community feasts keep ancient traditions alive. These celebrations bind the city's past to its present.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- final quote -->
+    <div class="heritage-quote fade-in">
+      <i>“धन्यं यशस्यमायुष्यं पुण्यं स्वर्ग्यं च यत्सदा । अयोध्यावासिनां नॄणां वासः स्वर्गाच्च गरीयसः”</i>
+      <div class="quote-ref">— Skanda Purāṇa, on the blessedness of dwelling in Ayodhya</div>
+    </div>
+
+  </main>
+
+  <!-- footer -->
+  <footer class="fade-in">
+    <div class="container">
+      <div style="font-family: 'Playfair Display', serif; font-size: 2rem; letter-spacing: 2px;">अयोध्या</div>
+      <div class="footer-divider"></div>
+      <p>heritage — where the past lives on</p>
+      <p style="margin-top: 2rem; opacity: 0.6; font-size: 0.8rem;">© itihasa darśana · preserving the legacy</p>
+    </div>
+  </footer>
+
+  <!-- Intersection Observer for animations -->
+  <script>
+    (function() {
+      const animateElements = document.querySelectorAll('.fade-up, .fade-in, .monument-item, .culture-item, .heritage-quote');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+      animateElements.forEach(el => observer.observe(el));
+    })();
+  </script>
+  <style>
+    /* ensure hero background fallback */
+    .hero-heritage {
+      background: #2f2a24 url('https://images.unsplash.com/photo-1601646994867-2cae9668e50b?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+    }
+  </style>
+</body>
+</html>

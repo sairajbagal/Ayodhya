@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antiquity of Ayodhya · the timeless city</title>
+  <!-- refined font palette -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <!-- Font Awesome for subtle icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ----- reset & base ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #faf7f2;  /* warm old paper */
+      color: #2e2a28;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ----- animations ----- */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in {
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+    .fade-in.show {
+      opacity: 1;
+    }
+    .scale-image {
+      transition: transform 1.2s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    .scale-image:hover {
+      transform: scale(1.02);
+    }
+
+    /* ----- hero specific (antiquity) ----- */
+    .hero-antiquity {
+      position: relative;
+      height: 80vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #f0e7dc;
+      overflow: hidden;
+      background: #2f2a24; /* fallback */
+    }
+    .hero-antiquity picture,
+    .hero-antiquity img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.65;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 10, 8, 0.35);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 950px;
+      padding: 2rem;
+      animation: softAppear 1.8s ease forwards;
+    }
+    @keyframes softAppear {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .hero-sub {
+      font-size: 1.2rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      font-weight: 300;
+      background: rgba(255, 235, 210, 0.15);
+      backdrop-filter: blur(4px);
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(230,200,160,0.2);
+      font-family: 'Inter', sans-serif;
+    }
+    .hero-title {
+      font-size: clamp(3.5rem, 12vw, 6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      margin-bottom: 1rem;
+    }
+    .hero-title span {
+      font-style: italic;
+      font-weight: 400;
+      color: #ebd5ba;
+    }
+    .hero-description {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 1.5rem auto 0;
+      font-weight: 300;
+      backdrop-filter: blur(2px);
+    }
+
+    /* ----- section styling ----- */
+    section {
+      padding: 5rem 0;
+    }
+    .section-title {
+      font-size: 3rem;
+      font-weight: 600;
+      color: #2c241e;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: #c6a27a;
+      margin-top: 0.75rem;
+    }
+    .title-light {
+      font-weight: 300;
+      color: #6b5847;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ----- grids & cards (antiquity focus) ----- */
+    .heritage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4rem;
+      align-items: center;
+      margin: 3rem 0;
+    }
+    .image-frame {
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.2);
+    }
+    .image-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 1s ease;
+    }
+    .image-frame:hover img {
+      transform: scale(1.03);
+    }
+    .image-frame figcaption {
+      background: #fffcf8;
+      padding: 1rem 1.2rem;
+      font-size: 0.95rem;
+      color: #4f443b;
+      border-top: 1px solid #ede3d8;
+      font-style: italic;
+    }
+    .text-content p {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      color: #3e3732;
+    }
+    .dropcap::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      float: left;
+      line-height: 0.8;
+      padding-right: 0.5rem;
+      color: #876b52;
+    }
+
+    /* inscription */
+    .inscription-block {
+      background: #eee7df;
+      padding: 2.5rem;
+      border-left: 5px solid #b58b6b;
+      font-style: italic;
+      font-size: 1.2rem;
+      margin: 3rem 0;
+      font-family: 'Playfair Display', serif;
+      color: #3b2f27;
+    }
+
+    /* timeline cards */
+    .timeline-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 4rem 0;
+    }
+    .card {
+      background: #fffcf8;
+      padding: 2rem 2rem 2.5rem 2rem;
+      flex: 1 1 220px;
+      border-radius: 2px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+      border: 1px solid #ede3d8;
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+    }
+    .card i {
+      font-size: 2.2rem;
+      color: #8f735b;
+      margin-bottom: 1.2rem;
+    }
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .card p {
+      font-size: 1rem;
+      color: #4f443b;
+    }
+
+    /* archaeology grid with proper image details */
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    .arch-item {
+      background: #fffcf8;
+      border: 1px solid #e3d8cd;
+      transition: opacity 0.4s, transform 0.4s;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .arch-item figure {
+      margin: 0;
+      position: relative;
+    }
+    .arch-item img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+    .arch-item figcaption {
+      padding: 1rem 1.2rem 1.5rem;
+      background: #fffcf8;
+      font-size: 0.95rem;
+      color: #3a322c;
+      border-top: 1px solid #eee5dc;
+    }
+    .arch-item figcaption strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: #533f30;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .arch-item figcaption span {
+      font-size: 0.9rem;
+      color: #6b5d51;
+      display: block;
+      margin-top: 0.3rem;
+      font-style: italic;
+    }
+
+    /* quote block */
+    .sanskrit-quote {
+      background: #e2d7cb;
+      padding: 4rem 3rem;
+      text-align: center;
+      font-size: 1.9rem;
+      font-family: 'Playfair Display', serif;
+      color: #2f261f;
+      border-radius: 1px;
+      margin: 4rem 0;
+    }
+    .sanskrit-quote i {
+      font-weight: 400;
+    }
+    .quote-ref {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 2rem;
+      color: #6b5d51;
+    }
+
+    /* footer */
+    footer {
+      background: #2b241f;
+      color: #ddcfc2;
+      padding: 3rem 0;
+      font-weight: 300;
+      text-align: center;
+    }
+    .footer-divider {
+      width: 60px;
+      height: 2px;
+      background: #6e5b4c;
+      margin: 1.5rem auto;
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .heritage-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .arch-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .arch-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 3.5rem;
+      }
+    }
+
+    /* inpage navigation */
+    .inpage-nav {
+      background: #f1ebe4;
+      border-bottom: 1px solid #d6ccbf;
+      padding: 0.8rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(241, 235, 228, 0.85);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #4a4038;
+      font-weight: 400;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      padding: 0.25rem 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #b58b6b;
+      color: #2b221c;
+    }
+    .nav-links a i {
+      margin-right: 6px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <!-- antiquity hero with detailed image -->
+  <div class="hero-antiquity">
+    <picture>
+      <img src="../assets/sculpture.webp" alt="Ancient stone carving with sacred motifs, possibly from temple ruins" loading="lazy">
+    </picture>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-sub"><i class="fas fa-om" style="margin-right: 8px;"></i> purātattva · आर्ष</div>
+      <h1 class="hero-title">antiquity of <span>ayodhya</span></h1>
+      <p class="hero-description">Vedic foundations, Ikshvaku lineage, and the city that time could not erase.</p>
+    </div>
+  </div>
+
+  <!-- sticky inpage nav -->
+  <div class="inpage-nav">
+    <div class="container nav-links">
+      <a href="#vedic"><i class="fas fa-scroll"></i> vedic & puranic</a>
+      <a href="#chronology"><i class="fas fa-hourglass-half"></i> chronology</a>
+      <a href="#excavations"><i class="fas fa-trowel"></i> excavations</a>
+      <a href="#dynasty"><i class="fas fa-crown"></i> solar dynasty</a>
+    </div>
+  </div>
+
+  <!-- main container -->
+  <main class="container">
+
+    <!-- 1. Vedic & puranic section with detailed image caption -->
+    <section id="vedic" class="fade-up">
+      <div class="title-light"><i class="fas fa-feather-alt" style="margin-right: 6px;"></i> vedic & puranic</div>
+      <h2 class="section-title">“built by the gods themselves”</h2>
+      <div class="heritage-grid">
+        <div class="text-content">
+          <p class="dropcap">Ayodhya is first mentioned in the Atharvaveda as a city “prosperous like paradise, built by gods and free from defeat”. The later Purāṇas (Vishnu, Vayu, Brahmanda) describe it as the capital of Ikṣvāku, the first king of the solar dynasty. For over 8000 years, according to tradition, this site has been continuously inhabited — a record among living cities.</p>
+          <p>The name itself is derived from the Sanskrit “yudh” (to fight) with the prefix “a” (not), meaning “unconquerable”. It was also known as Kośalā, the jewel of Mahākośala. The Rāmāyaṇa describes its walls as golden, its streets perfumed with sandal, and its citizens versed in the Vedas.</p>
+        </div>
+        <figure class="image-frame scale-image">
+          <img src="../assets/Ancient palm-leaf.png" alt="Ancient palm-leaf manuscript depicting early royal lineages" loading="lazy">
+          <figcaption><i class="fas fa-leaf" style="margin-right: 6px;"></i> 15th century copy of a Puranic manuscript, showing the Ikshvaku genealogy. (Bharat Kala Bhavan)</figcaption>
+        </figure>
+      </div>
+      <!-- inscription block -->
+      <div class="inscription-block fade-in">
+        <i class="fas fa-quote-left" style="opacity:0.4; margin-right: 12px;"></i> आसीदियोध्या नगरी सर्वरत्नैः सुसंस्कृता । नरेन्द्रपुराणां सा श्रेष्ठा शक्रस्येवामरावती ॥ <br>— वाल्मीकि रामायण (बालकाण्ड)
+      </div>
+    </section>
+
+    <!-- 2. Chronology of deep past -->
+    <section id="chronology" class="fade-up">
+      <div class="title-light"><i class="fas fa-hourglass-half"></i> deep time</div>
+      <h2 class="section-title">chronology of the ancient</h2>
+      <div class="timeline-cards">
+        <div class="card fade-up">
+          <i class="fas fa-mountain"></i>
+          <h3>early habitation</h3>
+          <p>Neolithic & Chalcolithic layers (circa 8th millennium BCE) — pottery, microliths found at nearby sites confirm ancient settlement.</p>
+        </div>
+        <div class="card fade-up">
+          <i class="fas fa-crown"></i>
+          <h3>ikṣvāku dynasty</h3>
+          <p>Traditional founding by Vaivasvata Manu. Over 60 kings before Rāma, including Harishchandra, Sagara, Bhagiratha.</p>
+        </div>
+        <div class="card fade-up">
+          <i class="fas fa-book"></i>
+          <h3>vedic period</h3>
+          <p>Mention in Śatapatha Brāhmaṇa. Centre of Vedic learning, hosted many yajnas and rishis like Vasiṣṭha.</p>
+        </div>
+        <div class="card fade-up">
+          <i class="fas fa-temple"></i>
+          <h3>mahājanapada</h3>
+          <p>6th cent. BCE: Kosala becomes one of 16 great states. King Prasenajit, contemporary of Buddha, ruled from Sāvatthi but Ayodhya remained sacred.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Excavations & findings with proper image details -->
+    <section id="excavations" class="fade-up">
+      <div class="title-light"><i class="fas fa-trowel"></i> archaeology</div>
+      <h2 class="section-title">unearthing the layers</h2>
+      <div class="arch-grid">
+        <figure class="arch-item fade-up">
+          <img src="../assets/Terracotta shards.webp" alt="Terracotta shards with painted patterns" loading="lazy">
+          <figcaption>
+            <strong>Terracotta shards · NBPW</strong>
+            Northern Black Polished Ware (700–200 BCE) excavated from the janmabhumi area. The fine gloss indicates advanced kiln technology.
+            <span>ASI excavation, 2003</span>
+          </figcaption>
+        </figure>
+        <figure class="arch-item fade-up">
+          <img src="../assets/pillar base.jpg" alt="Sandstone pillar base with lotus medallion" loading="lazy">
+          <figcaption>
+            <strong>Pillar base · Mauryan/Śuṅga</strong>
+            Structural remains from 3rd–1st cent. BCE. The lotus motif suggests an early temple or public hall.
+            <span>found near Hanumangarhi</span>
+          </figcaption>
+        </figure>
+        <figure class="arch-item fade-up">
+          <img src="../assets/mithuna.webp" alt="Sandstone sculpture of a mithuna couple" loading="lazy">
+          <figcaption>
+            <strong>Mithuna fragment · Kuṣāṇa</strong>
+            1st–3rd cent. CE. Such figures are associated with temple architecture, confirming an active religious centre.
+            <span>State Museum Lucknow</span>
+          </figcaption>
+        </figure>
+      </div>
+      <p style="margin: 2rem 0; font-size: 1.15rem;">The Archaeological Survey of India (1970s–2003) revealed a sequence of seven structural phases from the 8th century BCE to the present. The discovery of pillar bases and śikhara fragments confirms that Ayodhya was a prominent religious centre for over two millennia.</p>
+    </section>
+
+    <!-- 4. Solar dynasty with detailed image caption -->
+    <section id="dynasty" class="fade-up">
+      <div class="title-light"><i class="fas fa-sun"></i> sūryavaṁśa</div>
+      <h2 class="section-title">the solar lineage</h2>
+      <div class="heritage-grid" style="align-items: start;">
+        <figure class="image-frame scale-image">
+          <img src="../assets/suryavamsa.png" alt="18th century painting depicting the solar dynasty tree" loading="lazy">
+          <figcaption><i class="fas fa-palette" style="margin-right: 6px;"></i>Sūryavaṁśa from Manu to Rāma.</figcaption>
+        </figure>
+        <div class="text-content">
+          <p>Ayodhya is eternally linked to the sun dynasty. From Manu to Rāma, and beyond to the Buddhist kings, this lineage shaped the cultural landscape of South Asia. Even today, the Gahadavala kings (11th–12th cent.) invoked their descent from the sun to legitimise rule, and built numerous temples along the Sarayu.</p>
+          <p>Chinese pilgrim Xuanzang (7th cent.) noted numerous stupas and temples, and described Ayodhya as a flourishing centre of Buddhism and Hinduism alike. The city's antiquity is not merely legendary — it's etched in every layer of its soil.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- final sanskrit quote (full width) -->
+    <div class="sanskrit-quote fade-in">
+      <i>“पुरा वै मनुना यज्ञे यत्पुरीयं विनिर्मिता । तस्मात्पुरीति विख्याता सर्वकामफलप्रदा”</i>
+      <div class="quote-ref">— Skanda Purāṇa, Ayodhyā-māhātmya</div>
+    </div>
+
+  </main>
+
+  <!-- footer -->
+  <footer class="fade-in">
+    <div class="container">
+      <div style="font-family: 'Playfair Display', serif; font-size: 2rem; letter-spacing: 2px;">अयोध्या</div>
+      <div class="footer-divider"></div>
+      <p>antiquity — where history breathes</p>
+      <p style="margin-top: 2rem; opacity: 0.6; font-size: 0.8rem;">© itihasa darśana · all images depict timeless ayodhya</p>
+    </div>
+  </footer>
+
+  <!-- Intersection Observer for all animations -->
+  <script>
+    (function() {
+      // select all elements that should animate on scroll
+      const animateElements = document.querySelectorAll('.fade-up, .fade-in, .card, .arch-item, .inscription-block, .sanskrit-quote');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target); // once shown, stop watching
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+
+      animateElements.forEach(el => observer.observe(el));
+
+      // also ensure any already visible get show class (observer will handle)
+    })();
+  </script>
+  <!-- ensure hero background fallback -->
+  <style>
+    .hero-antiquity {
+      background: #332d26 url('https://images.unsplash.com/photo-1624898131815-855c7daccf3b?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+    }
+  </style>
+</body>
+</html>

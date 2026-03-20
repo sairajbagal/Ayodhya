@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sacred Ayodhya · tīrtha & spirituality</title>
+  <!-- refined font palette -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <!-- Font Awesome for subtle icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ----- reset & base (consistent with all tabs) ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #faf7f2;  /* warm old paper */
+      color: #2e2a28;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ----- animations (identical across tabs) ----- */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in {
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+    .fade-in.show {
+      opacity: 1;
+    }
+    .scale-image {
+      transition: transform 1.2s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    .scale-image:hover {
+      transform: scale(1.02);
+    }
+
+    /* ----- hero specific (sacred) - matching antiquity tone ----- */
+    .hero-sacred {
+      position: relative;
+      height: 80vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #f0e7dc;
+      overflow: hidden;
+      background: #2f2a24; /* deep brown fallback */
+    }
+    .hero-sacred picture,
+    .hero-sacred img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.65;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 10, 8, 0.35); /* same overlay */
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1000px;
+      padding: 2rem;
+      animation: softAppear 1.8s ease forwards;
+    }
+    @keyframes softAppear {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .hero-sub {
+      font-size: 1.2rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      font-weight: 300;
+      background: rgba(255, 235, 210, 0.15);
+      backdrop-filter: blur(4px);
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(230,200,160,0.2);
+      font-family: 'Inter', sans-serif;
+    }
+    .hero-title {
+      font-size: clamp(3.5rem, 12vw, 6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      margin-bottom: 1rem;
+    }
+    .hero-title span {
+      font-style: italic;
+      font-weight: 400;
+      color: #ebd5ba;
+    }
+    .hero-description {
+      font-size: 1.3rem;
+      max-width: 750px;
+      margin: 1.5rem auto 0;
+      font-weight: 300;
+      backdrop-filter: blur(2px);
+    }
+
+    /* ----- section styling (consistent) ----- */
+    section {
+      padding: 5rem 0;
+    }
+    .section-title {
+      font-size: 3rem;
+      font-weight: 600;
+      color: #2c241e;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: #c6a27a;
+      margin-top: 0.75rem;
+    }
+    .title-light {
+      font-weight: 300;
+      color: #6b5847;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ----- grids & cards (sacred focus) ----- */
+    .heritage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4rem;
+      align-items: center;
+      margin: 3rem 0;
+    }
+    .image-frame {
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.2);
+    }
+    .image-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 1s ease;
+    }
+    .image-frame:hover img {
+      transform: scale(1.03);
+    }
+    .image-frame figcaption {
+      background: #fffcf8;
+      padding: 1rem 1.2rem;
+      font-size: 0.95rem;
+      color: #4f443b;
+      border-top: 1px solid #ede3d8;
+      font-style: italic;
+    }
+    .text-content p {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      color: #3e3732;
+    }
+    .dropcap::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      float: left;
+      line-height: 0.8;
+      padding-right: 0.5rem;
+      color: #876b52;
+    }
+
+    /* sacred sites grid (temples, holy spots) */
+    .sacred-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 4rem 0;
+    }
+    .sacred-item {
+      background: #fffcf8;
+      border: 1px solid #e3d8cd;
+      border-radius: 2px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .sacred-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 30px -8px rgba(0,0,0,0.15);
+    }
+    .sacred-item figure {
+      margin: 0;
+    }
+    .sacred-item img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+    .sacred-item figcaption {
+      padding: 1.2rem 1.2rem 1.8rem;
+      background: #fffcf8;
+    }
+    .sacred-item figcaption strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: #533f30;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .sacred-item figcaption span {
+      font-size: 0.95rem;
+      color: #6b5d51;
+      display: block;
+      margin-top: 0.3rem;
+      font-style: italic;
+    }
+
+    /* rituals & practices cards */
+    .ritual-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    .ritual-item {
+      background: #fffcf8;
+      border: 1px solid #ede3d8;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .ritual-item:hover {
+      transform: translateY(-5px);
+    }
+    .ritual-item i {
+      font-size: 3rem;
+      color: #8f735b;
+      margin-bottom: 1.2rem;
+    }
+    .ritual-item h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .ritual-item p {
+      font-size: 0.95rem;
+      color: #4f443b;
+    }
+
+    /* pilgrimage circuit */
+    .circuit-card {
+      background: #f1ebe4;
+      padding: 3rem;
+      margin: 4rem 0;
+      border-left: 5px solid #b58b6b;
+    }
+    .circuit-card h3 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .circuit-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: space-between;
+    }
+    .step {
+      flex: 1 1 150px;
+      text-align: center;
+    }
+    .step .number {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background: #b58b6b;
+      color: white;
+      border-radius: 50%;
+      line-height: 40px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    /* quote block (same style) */
+    .sacred-quote {
+      background: #e2d7cb;
+      padding: 4rem 3rem;
+      text-align: center;
+      font-size: 1.9rem;
+      font-family: 'Playfair Display', serif;
+      color: #2f261f;
+      border-radius: 1px;
+      margin: 4rem 0;
+    }
+    .sacred-quote i {
+      font-weight: 400;
+    }
+    .quote-ref {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 2rem;
+      color: #6b5d51;
+    }
+
+    /* footer (identical) */
+    footer {
+      background: #2b241f;
+      color: #ddcfc2;
+      padding: 3rem 0;
+      font-weight: 300;
+      text-align: center;
+    }
+    .footer-divider {
+      width: 60px;
+      height: 2px;
+      background: #6e5b4c;
+      margin: 1.5rem auto;
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .heritage-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .sacred-grid, .ritual-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .sacred-grid, .ritual-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 3.5rem;
+      }
+    }
+
+    /* inpage navigation (consistent) */
+    .inpage-nav {
+      background: #f1ebe4;
+      border-bottom: 1px solid #d6ccbf;
+      padding: 0.8rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(241, 235, 228, 0.85);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #4a4038;
+      font-weight: 400;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      padding: 0.25rem 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #b58b6b;
+      color: #2b221c;
+    }
+    .nav-links a i {
+      margin-right: 6px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <!-- sacred hero - matching visual tone -->
+  <div class="hero-sacred">
+    <picture>
+      <img src="../assets/prayer.webp" alt="Evening prayer at Ram Janmabhoomi complex" loading="lazy">
+    </picture>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-sub"><i class="fas fa-om" style="margin-right: 8px;"></i> tīrtha · पुण्य</div>
+      <h1 class="hero-title">sacred <span>ayodhya</span></h1>
+      <p class="hero-description">Where the divine descends, and every stone is touched by faith.</p>
+    </div>
+  </div>
+
+  <!-- sticky inpage nav -->
+  <div class="inpage-nav">
+    <div class="container nav-links">
+      <a href="#tirthas"><i class="fas fa-map-marked-alt"></i> holy sites</a>
+      <a href="#rituals"><i class="fas fa-pray"></i> rituals & worship</a>
+      <a href="#pilgrimage"><i class="fas fa-shoe-prints"></i> pilgrimage</a>
+      <a href="#festivals"><i class="fas fa-calendar-alt"></i> sacred time</a>
+    </div>
+  </div>
+
+  <!-- main container -->
+  <main class="container">
+
+    <!-- 1. Holy Sites: introduction with image -->
+    <section id="tirthas" class="fade-up">
+      <div class="title-light"><i class="fas fa-map-marked-alt"></i> divya kṣetra · दिव्य क्षेत्र</div>
+      <h2 class="section-title">abodes of the sacred</h2>
+      <div class="heritage-grid">
+        <div class="text-content">
+          <p class="dropcap">Ayodhya is considered one of the seven most sacred cities (Sapta Puri) in Hinduism, capable of granting liberation (moksha). Its very soil is believed to be charged with the presence of Rama and the ancient rishis. For centuries, saints and mystics have made it their home, and countless shrines dot the cityscape—each with its own legend and spiritual energy.</p>
+          <p>The sacred geography extends beyond temples: the Sarayu river is itself a goddess, and bathing in her waters during solar eclipses or Kartik Purnima is considered supremely meritorious. The city's sacred aura attracts pilgrims not only from India but from Southeast Asia, where the Ramayana tradition remains vibrant.</p>
+        </div>
+        <figure class="image-frame scale-image">
+          <img src="../assets/bathing.webp" alt="Pilgrims bathing in Sarayu at dawn" loading="lazy">
+          <figcaption><i class="fas fa-water"></i> Pilgrims taking holy dip in the Sarayu at Brahmaghat. The river is worshipped as a mother goddess. (Photograph: Uttar Pradesh Tourism)</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- major sacred sites in grid -->
+    <section class="fade-up">
+      <div class="title-light"><i class="fas fa-star"></i> pradhāna tīrtha</div>
+      <div class="sacred-grid">
+        <figure class="sacred-item fade-up">
+          <img src="../assets/new shree rama temple.png" alt="Ram Janmabhoomi temple" loading="lazy">
+          <figcaption>
+            <strong>Rāma Janmabhūmi</strong>
+            The birthplace of Lord Rāma, the most sacred spot in Ayodhya. The new temple (2024) stands as a symbol of enduring faith.
+            <span>Excavations revealed 8th century BCE layers</span>
+          </figcaption>
+        </figure>
+        <figure class="sacred-item fade-up">
+          <img src="../assets/hanuman garhi.jpg" alt="Hanuman Garhi" loading="lazy">
+          <figcaption>
+            <strong>Hanumān Garhi</strong>
+            A fortress-temple dedicated to Hanuman, who is believed to guard the city. Devotees climb 76 steps before receiving darshan.
+            <span>10th century origins · renovated 1700s</span>
+          </figcaption>
+        </figure>
+        <figure class="sacred-item fade-up">
+          <img src="../assets/kanak bhawan.jpg" alt="Kanak Bhawan" loading="lazy">
+          <figcaption>
+            <strong>Kanak Bhawan</strong>
+            Believed to be gifted to Sita by Queen Kaikeyi. The gold-adorned idols of Rama and Sita are a highlight.
+            <span>16th century · renovated 1891</span>
+          </figcaption>
+        </figure>
+        <figure class="sacred-item fade-up">
+          <img src="../assets/guptar ghat.png" alt="Guptar Ghat" loading="lazy">
+          <figcaption>
+            <strong>Guptar Ghat</strong>
+            The spot where Rama is said to have taken jal samadhi (holy departure). A sacred place for final rituals.
+            <span>Pavilions from 18th century</span>
+          </figcaption>
+        </figure>
+        <figure class="sacred-item fade-up">
+          <img src="../assets/nageshwar temple.jpg" alt="Nageshwarnath Temple" loading="lazy">
+          <figcaption>
+            <strong>Nageshwarnath Temple</strong>
+            Legend connects it to Kush, Rama's son. It remained a key pilgrimage site even during Mughal rule.
+            <span>Annual Shivaratri fair</span>
+          </figcaption>
+        </figure>
+        <figure class="sacred-item fade-up">
+          <img src="../assets/parvat.jpg" alt="Manu Parbat" loading="lazy">
+          <figcaption>
+            <strong>Manu Parbat & Chakratirtha</strong>
+            Sacred hillock associated with Manu, the progenitor of mankind. Offers panoramic views of the city.
+            <span>Ancient tīrtha mentioned in Puranas</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 2. Rituals & Worship -->
+    <section id="rituals" class="fade-up">
+      <div class="title-light"><i class="fas fa-pray"></i> upāsanā · उपासना</div>
+      <h2 class="section-title">daily rhythms of devotion</h2>
+      <div class="ritual-grid">
+        <div class="ritual-item fade-up">
+          <i class="fas fa-fire"></i>
+          <h3>Mangala Aarti</h3>
+          <p>The first worship before dawn, when deities are awakened with lamps, conch shells, and Vedic chants. Performed at major temples.</p>
+        </div>
+        <div class="ritual-item fade-up">
+          <i class="fas fa-cloud-sun"></i>
+          <h3>Sarayu Aarti</h3>
+          <p>Every evening at Ram ki Paidi, priests offer lamps to the river goddess. Hundreds of floating diyas create a mesmerizing sight.</p>
+        </div>
+        <div class="ritual-item fade-up">
+          <i class="fas fa-leaf"></i>
+          <h3>Abhisheka</h3>
+          <p>Ritual bathing of idols with milk, honey, and sacred water. Performed especially on Mondays and during festivals.</p>
+        </div>
+      </div>
+      <!-- detailed ritual image -->
+      <figure class="image-frame scale-image" style="margin-top: 2rem;">
+        <img src="../assets/evening aarti.jpeg" alt="Evening aarti at Sarayu" loading="lazy">
+        <figcaption><i class="fas fa-fire"></i> The evening aarti at Ram ki Paidi: priests in traditional attire wave lamps while chanting, as thousands gather on the ghats. (Photo: UP Tourism)</figcaption>
+      </figure>
+    </section>
+
+    <!-- 3. Pilgrimage Circuit -->
+    <section id="pilgrimage" class="fade-up">
+      <div class="title-light"><i class="fas fa-shoe-prints"></i> yātrā · पंचकोसी</div>
+      <h2 class="section-title">the sacred circuit</h2>
+      <div class="circuit-card">
+        <h3>Pañchkośī Yātrā</h3>
+        <p>The ancient pilgrimage circuit around Ayodhya, covering approximately 45 kilometers. Devotees walk this path over five days, visiting 108 sacred spots including temples, tanks, and forests associated with Rama's legend. It is believed to cleanse all sins and grant the same merit as a horse sacrifice.</p>
+        <div class="circuit-steps" style="margin-top: 2rem;">
+          <div class="step"><span class="number">1</span> <strong>Day 1:</strong> Ayodhya to Saryu</div>
+          <div class="step"><span class="number">2</span> <strong>Day 2:</strong> Saryu to Jogiana</div>
+          <div class="step"><span class="number">3</span> <strong>Day 3:</strong> Jogiana to Ramghat</div>
+          <div class="step"><span class="number">4</span> <strong>Day 4:</strong> Ramghat to Gopratara</div>
+          <div class="step"><span class="number">5</span> <strong>Day 5:</strong> Return to Ayodhya</div>
+        </div>
+      </div>
+      <!-- image of pilgrims walking -->
+      <figure class="image-frame scale-image">
+        <img src="../assets/pilgrim walking.jpg" alt="Pilgrims walking on Panchkosi road" loading="lazy">
+        <figcaption><i class="fas fa-walking"></i> Devotees on the Pañchkośī Yātrā, carrying saffron flags and singing bhajans. The route is dotted with small shrines and rest houses (dharmashalas).</figcaption>
+      </figure>
+    </section>
+
+    <!-- 4. Festivals: Sacred Time -->
+    <section id="festivals" class="fade-up">
+      <div class="title-light"><i class="fas fa-calendar-alt"></i> utsava · पर्व</div>
+      <h2 class="section-title">when the city becomes a temple</h2>
+      <div class="heritage-grid">
+        <figure class="image-frame scale-image">
+          <img src="../assets/deepotsav 1.jpg" alt="Deepotsav in Ayodhya" loading="lazy">
+          <figcaption><i class="fas fa-lightbulb"></i> Deepotsav 2023: over 22 lakh lamps illuminated the ghats, setting a world record. The festival celebrates Rama's return to Ayodhya.</figcaption>
+        </figure>
+        <div class="text-content">
+          <p>Sacred time in Ayodhya is marked by festivals that transform the city into a living temple. Ram Navami (March-April) celebrates Rama's birth with processions, chariots, and mass chanting. Kartik Purnima (November) sees the ghats crowded with pilgrims taking holy dips.</p>
+          <p>Shravan Jhoola (July-August) features swings decorated with flowers, carrying idols of Rama and Sita. Ekadashi days draw thousands for fasting and vigil. Each festival is an opportunity to renew one's connection with the divine.</p>
+        </div>
+      </div>
+      <!-- additional festival images in mini grid -->
+      <div class="sacred-grid" style="margin-top: 3rem; grid-template-columns: repeat(2,1fr);">
+        <figure class="sacred-item">
+          <img src="../assets/ram navmi.jpg" alt="Ram Navami procession">
+          <figcaption><strong>Ram Navami</strong> Chariot procession with thousands of devotees.</figcaption>
+        </figure>
+        <figure class="sacred-item">
+          <img src="../assets/kartik purnima.jpg" alt="Kartik Purnima">
+          <figcaption><strong>Kartik Purnima</strong> Pilgrims at dawn on the ghats.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- final sacred verse -->
+    <div class="sacred-quote fade-in">
+      <i>“अयोध्या मथुरा माया काशी काञ्ची अवन्तिका । पुरी द्वारावती चैव सप्तैता मोक्षदायिकाः”</i>
+      <div class="quote-ref">— Garuḍa Purāṇa, on the seven liberating cities</div>
+    </div>
+
+  </main>
+
+  <!-- footer -->
+  <footer class="fade-in">
+    <div class="container">
+      <div style="font-family: 'Playfair Display', serif; font-size: 2rem; letter-spacing: 2px;">अयोध्या</div>
+      <div class="footer-divider"></div>
+      <p>sacred — where the divine dwells</p>
+      <p style="margin-top: 2rem; opacity: 0.6; font-size: 0.8rem;">© itihasa darśana · in reverence</p>
+    </div>
+  </footer>
+
+  <!-- Intersection Observer for animations -->
+  <script>
+    (function() {
+      const animateElements = document.querySelectorAll('.fade-up, .fade-in, .sacred-item, .ritual-item, .circuit-card, .sacred-quote');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+      animateElements.forEach(el => observer.observe(el));
+    })();
+  </script>
+  <style>
+    /* ensure hero background fallback */
+    .hero-sacred {
+      background: #2f2a24 url('https://images.unsplash.com/photo-1624898132204-153014751b74?q=80&w=1974&auto=format&fit=crop') center/cover no-repeat;
+    }
+  </style>
+</body>
+</html>
